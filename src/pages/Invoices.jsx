@@ -23,7 +23,7 @@ import { fr } from '../locales/fr';
  * - Supprimer les factures
  */
 export default function Invoices() {
-  const { invoices, addInvoice, updateInvoice, deleteInvoice, getNextInvoiceNumber } = useInvoices();
+  const { invoices, addInvoice, updateInvoice, deleteInvoice } = useInvoices();
   const { clients } = useClients();
   const { settings } = useSettings();
   const { downloadPdf } = usePdfDownload();
@@ -137,7 +137,7 @@ export default function Invoices() {
       const document = <InvoicePDF invoice={invoice} client={client} settings={settings} />;
       await downloadPdf(document, `${invoice.number}.pdf`);
       showToast(fr.invoices.downloadSuccess, 'success');
-    } catch (error) {
+    } catch {
       showToast(fr.invoices.downloadError, 'error');
     }
   };
